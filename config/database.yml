@@ -8,11 +8,11 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
-development: &booking
+development: &reservation
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: booking_development
+  database: reservation_development
   pool: 5
   username: root
   password: 
@@ -22,9 +22,9 @@ development: &booking
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: 
-  <<: *booking
-  databse: booking_test
+  <<: *reservation
+  databse: reservation_test
 
 production:
-  <<: *booking
-  database: booking_production
+  <<: *reservation
+  database: reservation_production

@@ -1,2 +1,2 @@
-Booking::Application.routes.draw do  
+Reservation::Application.routes.draw do  
 end
