@@ -1,0 +1,5 @@
+  [1m[36m (16.7ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (16.4ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (1.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (0.8ms)[0m  DROP DATABASE IF EXISTS `booking_development`
+  [1m[36m (0.2ms)[0m  [1mCREATE DATABASE `booking_development` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
