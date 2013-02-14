@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214201812) do
+ActiveRecord::Schema.define(:version => 20130214231411) do
+
+  create_table "bookings", :force => true do |t|
+    t.integer  "number_of_guests"
+    t.integer  "room_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "bookings", ["room_id"], :name => "index_bookings_on_room_id"
 
   create_table "hosts", :force => true do |t|
     t.string   "name"
