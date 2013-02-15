@@ -41,6 +41,7 @@ gem "mysql2", ">= 0.3.11"
 gem "haml", ">= 3.1.7"
 gem 'json'
 gem 'colored'
+gem 'bootstrap-datepicker-rails'
 gem "haml-rails", ">= 0.3.5", :group => :development
 gem "hpricot", ">= 0.8.6", :group => :development
 gem "ruby_parser", ">= 3.1.1", :group => :development
@@ -49,6 +50,7 @@ gem "capybara", ">= 2.0.2", :group => :test
 gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "email_spec", ">= 1.4.0", :group => :test
 gem "factory_girl_rails", ">= 4.2.0", :group => [:development, :test]
+gem "shoulda", :group => :test
 gem "bootstrap-sass", ">= 2.2.2.0"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "figaro", ">= 0.5.3"
