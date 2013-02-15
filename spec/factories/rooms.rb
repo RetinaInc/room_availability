@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :room do
     capacity 1
-    host nil
+    host
   end
 end
