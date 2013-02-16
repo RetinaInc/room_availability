@@ -1,7 +1,7 @@
 Reservation::Application.routes.draw do  
   get "availability/index"
 
-  get "availability/search"
+  post "availability/search"
 
   root :to => 'availability#index'
 
