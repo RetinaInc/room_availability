@@ -12,13 +12,9 @@ describe Booking do
       b.end_date.should be_an_instance_of(Date)
     end
     
-    it "should have a number_of_guests attribute of type Fixnum" do
-      b.number_of_guests.should be_an_instance_of(Fixnum)
-    end
-    
-    it "should have a room associated" do
-      b.room.should be_an_instance_of(Room)
-    end
+    it { should validate_numericality_of(:number_of_guests) }
         
+    it { should belong_to(:room) }
+ 
   end
 end
