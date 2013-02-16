@@ -3,21 +3,19 @@ class Room < ActiveRecord::Base
   has_many :bookings
   
   attr_accessible :capacity
-  
-  validates :capacity, :numericality => true
-  
-  #scope :with_availabilty_between, lambda { |start_date, end_date, guests| guests_between(start_date, end_date) <= capacity - guests }
-  
-  def guests_between(start_date, end_date)
-    if start_date <= end_date 
-      guests = 0
-      self.bookings.overlapping(start_date, end_date).each do |booking|
-        guests += booking.number_of_guests
-      end
-      return guests
-    else
-      return 0
-    end
-  end
     
+  validates :capacity, :numericality => true
+    
+  def guests_between(start_date, end_date)
+    return self.bookings.overlapping(start_date, end_date)
+               .collect   { |booking| booking.number_of_guests }
+               .inject(0) { |sum, guests| sum + guests } if start_date <= end_date
+    return 0
+  end
+  
+  def available_between?(start_date, end_date, guests)
+    return (self.capacity - self.guests_between(start_date, end_date)) >= guests.to_i if start_date <= end_date
+    return false
+  end
+  
 end
