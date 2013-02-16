@@ -1,4 +1,4 @@
-= form_tag('availability/search', :remote => true, :class => 'form-search') do
+= form_tag(search_url, :class => 'form-search') do
 	%fieldset
 		%label= "Start Date"
 		= text_field_tag :start_date, params[:start_date], :class => "datepicker"
@@ -7,16 +7,8 @@
 		%label= "Number of Guests"
 		= number_field_tag :guests, params[:guests], :min => 1
 			
-	
 		%button.btn{:type => "submit"}
 			= "Search"
-		
-%table#available_rooms.table.table-striped.table-bordered.table-condensed
-	%thead
-		%tr
-			%th#host_ref= "Host Ref"
-			%th#host_name= "Host Name"
-			%th#host_address= "Host Address"
-			%th#room_ref= "Room Ref"
-			%th#guests_booked= "Guests Booked"
-			%th#availability= "Availability"
+
+- if params[:action] != "index"
+	= render 'table', :locals => @available_rooms

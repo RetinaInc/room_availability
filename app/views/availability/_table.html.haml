@@ -1,0 +1,19 @@
+%table#availability_datatable.table.table-striped.table-bordered.table-condensed.display
+	%thead
+		%tr
+			%th#host_ref= "Host Ref"
+			%th#host_name= "Host Name"
+			%th#host_address= "Host Address"
+			%th#room_ref= "Room Ref"
+			%th#guests_booked= "Guests Booked"
+			%th#availability= "Availability"
+	%tbody
+		- @available_rooms.each do |room_id|
+			- room = Room.find(room_id)
+			%tr
+				%td= room.host.id
+				%td= room.host.name
+				%td= room.host.address
+				%td= "Room##{room.id}"
+				%td= "To complete"
+				%td= "To complete"
