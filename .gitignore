@@ -39,3 +39,5 @@ tmp/cache/assets/D9F/300/sprockets%2Fc13fc73ceafa45876a901b3e775b83ae
 *.log
 
 *.log
+
+tmp/pids/server.pid
