@@ -15,5 +15,5 @@
 				%td= room.host.name
 				%td= room.host.address
 				%td= "Room##{room.id}"
-				%td= "To complete"
-				%td= "To complete"
+				%td= "#{room.booked_guests} booked"
+				%td= "#{room.capacity - room.booked_guests} free out of #{room.capacity} total"
