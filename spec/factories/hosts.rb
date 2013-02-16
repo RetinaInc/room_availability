@@ -6,7 +6,7 @@ FactoryGirl.define do
     address "MyString"
   end
   
-  factory :host_with_available_rooms, :parent => :host do
+  factory :host_with_available_rooms_today, :parent => :host do
     ignore do
       available_rooms 2
     end
