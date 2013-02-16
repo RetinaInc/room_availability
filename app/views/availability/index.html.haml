@@ -5,7 +5,7 @@
 		%label= "End Date"
 		= text_field_tag :end_date, params[:end_date], :class => "datepicker"
 		%label= "Number of Guests"
-		= number_field_tag :guests
+		= number_field_tag :guests, params[:guests], :min => 1
 			
 	
 		%button.btn{:type => "submit"}
