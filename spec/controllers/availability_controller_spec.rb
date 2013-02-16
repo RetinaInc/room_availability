@@ -29,5 +29,21 @@ describe AvailabilityController do
     it { page.should have_selector("th#availability") }
 
   end
- 
+
+  describe "GET 'search'" do
+    context "JSON response" do
+      before(:each) do
+        @host_with_available_rooms = create(:host_with_available_rooms, available_rooms: 2)
+        @expected = @host_with_available_rooms.rooms.to_json
+        get 'search', :format => :json, :start_date => Date.today, :end_date => Date.today, :guests => 1
+      end
+      
+      after :each do
+        @host_with_available_rooms.destroy
+      end
+
+      it { should respond_with(:success) }
+      it { should respond_with_content_type(/json/)}
+    end
+  end
 end
