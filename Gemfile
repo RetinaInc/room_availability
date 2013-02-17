@@ -46,6 +46,9 @@ gem "haml", ">= 3.1.7"
 gem 'json'
 gem 'colored'
 gem 'bootstrap-datepicker-rails'
+gem 'pry-debugger'
+gem 'jazz_hands' # A better console
+gem 'bullet'
 gem "haml-rails", ">= 0.3.5", :group => :development
 gem "hpricot", ">= 0.8.6", :group => :development
 gem "ruby_parser", ">= 3.1.1", :group => :development
