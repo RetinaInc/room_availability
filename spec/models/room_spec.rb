@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Room do
   let(:r) { r = build(:room) }
-  context "attributes" do
+  context "attributes: " do
     
     it { should validate_numericality_of(:capacity) }
     it { should belong_to(:host) }
         
   end
   
-  context "methods" do
+  context "methods: " do
     before :all do 
       @room = create(:room)
     end
@@ -38,7 +38,25 @@ describe Room do
         @room.guests_between(Date.new(2012,02,22), Date.new(2012,02,23)).should == 0
         booking.destroy
       end
-    end    
+    end
+    
+    describe "check_capacity?" do
+      before :all do
+        @guests = 1
+        @guests_booked = @room.capacity - @guests
+      end
+      
+      it "should return true if there is enough capacity for guests in a date range" do
+        (@room.capacity - @guests_booked - @guests >= 0).should be_true
+        @room.check_capacity?(@guests_booked , @guests).should be_true
+      end
+         
+      it "should return false if there is not enough capacity for guests in a date range" do
+        @guests_booked = @room.capacity
+        (@room.capacity - @guests_booked - @guests >= 0 ).should be_false
+        @room.check_capacity?(@guests_booked , @guests).should be_false
+      end    
+    end
   end
     
 end

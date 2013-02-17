@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Host do
-  let(:h) { h = create(:host_with_rooms, available_rooms: 2) }
-  context "attributes" do
+  let(:h) { h = build(:host) }
+  context "attributes: " do
     
     it "should have a name attribute of type string" do
       h.name.should be_an_instance_of(String)
@@ -14,32 +14,45 @@ describe Host do
     
   end
   
-  context "methods" do
+  context "methods: " do
      
     describe "available_rooms_between" do
+      before :all do
+        @host = create(:host_with_rooms, available_rooms: 2)
+      end
+      
+      after :all do
+        @host.destroy
+      end
+      
       it "should return empty array if start_date is later than end_date" do
-        h.available_rooms_between(Date.today, Date.today-1, 1).should be_empty
+        @host.available_rooms_between(Date.today, Date.today - 1, 1).should be_empty
       end
       
-      it "should return an array with the rooms id of own rooms available in a certain date range for a number of guests" do
-        h.rooms.each do |room|
-          room.stub(:guests_between).and_return(0)
+      it "should return an array with the rooms details of own rooms available in a certain date range for a number of guests" do
+        @host.rooms.each do |room|
+          room.stub(:check_capacity?).and_return(true)
         end
-        h.available_rooms_between(Date.today, Date.today, 1).count.should == h.rooms.count
+        result = @host.available_rooms_between(Date.today, Date.today, 1)
+        result.count.should == @host.rooms.count
+        result.first.should == [@host.rooms.first.id, @host.rooms.first.guests_between(Date.today, Date.today)]        
       end
       
-      it "should return an array with the rooms id of own rooms available in a certain date range for a number of guests" do
-        h.rooms.first.stub(:guests_between).and_return(0)
-        h.rooms.second.stub(:guests_between).and_return(h.rooms.second.capacity)
-        h.available_rooms_between(Date.today, Date.today, 1).count.should == 1
+      it "should not return a room's details if that room is not available in a certain date range for a number of guests" do
+        @host.rooms.first.stub(:check_capacity?).and_return(true)
+        @host.rooms.second.stub(:check_capacity?).and_return(false)
+        result = @host.available_rooms_between(Date.today, Date.today, 1)
+        result.count.should == 1
+        result.first.should == [@host.rooms.first.id, @host.rooms.first.guests_between(Date.today, Date.today)]
       end
       
       it "should return empty array if all the rooms are occupied in a certain date range" do
-        h.rooms.each do |room|
-          room.stub(:guests_between).and_return(room.capacity)
+        @host.rooms.each do |room|
+          room.stub(:check_capacity?).and_return(false)
         end
-        h.available_rooms_between(Date.today, Date.today, 1).should be_empty
+        @host.available_rooms_between(Date.today, Date.today, 1).should be_empty
       end
     end
+    
   end
 end

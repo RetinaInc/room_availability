@@ -8,7 +8,7 @@ class Host < ActiveRecord::Base
     if start_date <= end_date 
       self.rooms.each do |room|
         guests_booked = room.guests_between(start_date, end_date)
-        if (room.capacity - guests_booked) >= guests.to_i
+        if room.check_capacity?(guests_booked, guests)
           rooms_available << [room.id, guests_booked]
         end
       end

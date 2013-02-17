@@ -11,5 +11,9 @@ class Room < ActiveRecord::Base
                .collect   { |booking| booking.number_of_guests }
                .inject(0) { |sum, guests| sum + guests } if start_date <= end_date
     return 0
-  end  
+  end
+  
+  def check_capacity?(guests_booked, guests)
+    return (self.capacity - guests_booked - guests) >= 0
+  end
 end
