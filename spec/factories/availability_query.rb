@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :availability_query do
-    start_date "2013-02-14"
+    start_date "2013-02-13"
     end_date "2013-02-14"
 		guests 1
   end

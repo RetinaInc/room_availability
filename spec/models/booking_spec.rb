@@ -12,7 +12,7 @@ describe Booking do
       b.end_date.should be_an_instance_of(Date)
     end
     
-    it { should validate_numericality_of(:number_of_guests) }
+    it { should validate_numericality_of(:number_of_guests).only_integer }
         
     it { should belong_to(:room) }
  

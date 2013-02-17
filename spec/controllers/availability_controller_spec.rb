@@ -25,7 +25,7 @@ describe AvailabilityController do
 
   describe "GET 'search'" do
     before(:all) do
-      @date = Date.today
+      @date = '2013-02-01'
       @hosts = create_list(:host_with_rooms, 5, available_rooms: 2)
       # There are no bookings so all the rooms are available (guests_booked = 0)
       @expected = @hosts.collect{ |host| host.rooms.collect { |room| [room.id, 0] } } 
