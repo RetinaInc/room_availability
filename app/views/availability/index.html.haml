@@ -1,14 +1,4 @@
-= form_tag(search_url, :class => 'form-search') do
-	%fieldset
-		%label= "Start Date"
-		= text_field_tag :start_date, params[:start_date], :class => "datepicker"
-		%label= "End Date"
-		= text_field_tag :end_date, params[:end_date], :class => "datepicker"
-		%label= "Number of Guests"
-		= number_field_tag :guests, params[:guests], :min => 1
-			
-		%button.btn{:type => "submit"}
-			= "Search"
+= render 'form'
 
-- if params[:action] != "index"
+- if params[:action] != "index" and @available_rooms.present?
 	= render 'table', :locals => @available_rooms
