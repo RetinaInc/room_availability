@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130216222558) do
+ActiveRecord::Schema.define(:version => 20130217225921) do
 
   create_table "bookings", :force => true do |t|
     t.integer  "number_of_guests"
@@ -34,9 +34,8 @@ ActiveRecord::Schema.define(:version => 20130216222558) do
   create_table "rooms", :force => true do |t|
     t.integer  "capacity"
     t.integer  "host_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "booked_guests"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "rooms", ["host_id"], :name => "index_rooms_on_host_id"
