@@ -5,9 +5,14 @@ class Host < ActiveRecord::Base
   
   def available_rooms_between(start_date, end_date, guests)
     rooms_available = []
-    self.rooms.each do |room|
-      rooms_available << room.id if room.available_between?(start_date, end_date, guests)
+    if start_date <= end_date 
+      self.rooms.each do |room|
+        guests_booked = room.guests_between(start_date, end_date)
+        if (room.capacity - guests_booked) >= guests.to_i
+          rooms_available << [room.id, guests_booked]
+        end
+      end
     end
     return rooms_available
-  end
+  end  
 end

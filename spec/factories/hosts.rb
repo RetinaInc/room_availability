@@ -6,13 +6,13 @@ FactoryGirl.define do
     address "MyString"
   end
   
-  factory :host_with_available_rooms_today, :parent => :host do
+  factory :host_with_rooms, :parent => :host do
     ignore do
       available_rooms 2
     end
     
     after(:create) do |host, evaluator|
-      FactoryGirl.create_list(:room, evaluator.available_rooms, host: host)
+      FactoryGirl.create_list(:room, evaluator.available_rooms, host: host, capacity: 2)
     end
   end
 

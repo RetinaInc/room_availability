@@ -25,8 +25,8 @@ describe AvailabilityController do
 
   describe "GET 'search'" do
     before(:all) do
-      @host = create(:host_with_available_rooms_today, available_rooms: 2)
-      @expected = @host.rooms.collect { |room| room.id }
+      @host = create(:host_with_rooms, available_rooms: 2)
+      @expected = @host.rooms.collect { |room| [room.id, room.guests_between(Date.today, Date.today)] }
     end
       
     after :all do

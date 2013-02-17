@@ -8,12 +8,12 @@
 			%th#guests_booked= "Guests Booked"
 			%th#availability= "Availability"
 	%tbody
-		- @available_rooms.each do |room_id|
-			- room = Room.find(room_id)
+		- @available_rooms.each do |room_details|
+			- room = Room.find(room_details[0])
 			%tr
 				%td= room.host.id
 				%td= room.host.name
 				%td= room.host.address
 				%td= "Room##{room.id}"
-				%td= "#{room.booked_guests} booked"
-				%td= "#{room.capacity - room.booked_guests} free out of #{room.capacity} total"
+				%td= "#{room_details[1]} booked"
+				%td= "#{room.capacity - room_details[1]} free out of #{room.capacity} total"
