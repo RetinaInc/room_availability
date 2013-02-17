@@ -232,6 +232,9 @@ GEM
     shoulda-matchers (1.4.2)
       activesupport (>= 3.0.0)
       bourne (~> 1.1.2)
+    simple_form (2.0.4)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     slop (3.4.3)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -291,6 +294,7 @@ DEPENDENCIES
   ruby_parser (>= 3.1.1)
   sass-rails (~> 3.2.3)
   shoulda
+  simple_form
   thin (>= 1.5.0)
   uglifier (>= 1.0.3)
   will_paginate
