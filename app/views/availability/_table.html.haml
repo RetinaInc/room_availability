@@ -4,16 +4,16 @@
 			%th#host_ref= "Host Ref"
 			%th#host_name= "Host Name"
 			%th#host_address= "Host Address"
-			%th#room_ref= "Room Ref"
-			%th#guests_booked= "Guests Booked"
-			%th#availability= "Availability"
+			%th#availability_details= "Availability Details"
 	%tbody
-		- @available_rooms.each do |room_details|
-			- room = Room.find(room_details[0])
+		- @available_rooms.each do |host_details|
+			- room = Room.find(host_details.first.first)
 			%tr
 				%td= room.host.id
 				%td= room.host.name
 				%td= room.host.address
-				%td= "Room##{room.id}"
-				%td= "#{room_details[1]} booked"
-				%td= "#{room.capacity - room_details[1]} free out of #{room.capacity} total"
+				%td
+					- host_details.each do |room_details|
+						- room = Room.find(room_details[0])
+						= "Room##{room.id} is available (#{room_details[1]} booked, #{room.capacity - room_details[1]} free out of #{room.capacity} total)"
+						%br

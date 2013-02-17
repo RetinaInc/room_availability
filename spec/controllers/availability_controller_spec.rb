@@ -25,12 +25,12 @@ describe AvailabilityController do
 
   describe "GET 'search'" do
     before(:all) do
-      @host = create(:host_with_rooms, available_rooms: 2)
-      @expected = @host.rooms.collect { |room| [room.id, room.guests_between(Date.today, Date.today)] }
+      @hosts = create_list(:host_with_rooms, 5, available_rooms: 2)
+      @expected = @hosts.collect{ |host| host.rooms.collect { |room| [room.id, 0] } }
     end
       
     after :all do
-      @host.destroy
+      @hosts.each { |h| h.destroy } 
     end
     
     context "JSON response" do
@@ -63,12 +63,10 @@ describe AvailabilityController do
       it { page.should have_selector("th#host_ref") }
       it { page.should have_selector("th#host_name") }
       it { page.should have_selector("th#host_address") }
-      it { page.should have_selector("th#room_ref") }
-      it { page.should have_selector("th#guests_booked") }
-      it { page.should have_selector("th#availability") }
+      it { page.should have_selector("th#availability_details") }
       
-      # Checking that the table has two rows with the rooms available
-      it { page.should have_selector("tbody tr", :count => 2) }
+      # Checking that the table has as many rows as the number of hosts
+      it { page.should have_selector("tbody tr", :count => @hosts.length) }
       
     end
     
