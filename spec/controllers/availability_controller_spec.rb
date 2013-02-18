@@ -28,7 +28,10 @@ describe AvailabilityController do
       @date = '2013-02-01'
       @hosts = create_list(:host_with_rooms, 5, available_rooms: 2)
       # There are no bookings so all the rooms are available (guests_booked = 0)
-      @expected = @hosts.collect{ |host| host.rooms.collect { |room| [room.id, 0] } } 
+      @expected = []
+      @hosts.each do |host|
+        @expected << { host: host.id, rooms: host.rooms.collect { |room| [room.id, 0] } }
+      end
     end
       
     after :all do
@@ -44,9 +47,8 @@ describe AvailabilityController do
       it { should respond_with_content_type(/json/)}
       it { should assign_to(:available_rooms) }
             
-      it "should return the correct JSON format" do 
-        body = JSON.parse(response.body)
-        body.should == @expected
+      it "should return the correct JSON format" do
+        response.body.should == @expected.to_json
       end
     end
     
@@ -61,7 +63,7 @@ describe AvailabilityController do
       }
       
       it { should respond_with(:unprocessable_entity) }
-      it { should_not assign_to(:available_rooms) }      
+      it { should assign_to(:available_rooms).with([]) }      
       it { should respond_with_content_type(/json/)}
       
       it "should return the errors in JSON format" do 

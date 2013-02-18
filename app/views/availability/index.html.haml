@@ -1,4 +1,4 @@
 = render 'form'
 
-- if params[:action] != "index" and @available_rooms.present?
+- if @availability_query.valid? and params[:action] == 'search'
 	= render 'table', :locals => @available_rooms
