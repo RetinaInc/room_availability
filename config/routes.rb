@@ -1,4 +1,4 @@
-Reservation::Application.routes.draw do
+RoomAvailability::Application.routes.draw do
   
   get "availability/index", :as => :index
 
